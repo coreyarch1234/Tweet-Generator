@@ -6,15 +6,15 @@ words = open('words.txt', 'r')
 word_set = words.readlines()
 
 word_set_list = []
-for line in word_set:
-    word_set_list.append(line.strip())
+# for line in word_set:
+#     word_set_list.append(line.strip())
 
-# for i in word_set:
-#     thisline = i.split(" ")
-# words.close()
+for i in word_set:
+    thisline = i.split(" ")
+words.close()
 
 #Handles reading input from user
-number_of_words = map(int, raw_input())
+num_count = int(raw_input())
 
 import random
 import sys
@@ -33,14 +33,18 @@ def random_list(a):
     return b
 
 
-def random_sequence():
+def random_sequence(num_count):
     array = []
+    return_array = []
     random = make_list()
-    print("The word is " + str(random))
+    # print("The word is " + str(random))
     for rand in random_list(random):
         array.append(rand)
-    print(array)
+    # print(array)
+    for count in range(0, num_count):
+        return_array.append(array[count])
+    print(return_array)
 
 
 if __name__ == '__main__':
-    random_sequence()
+    random_sequence(num_count)
