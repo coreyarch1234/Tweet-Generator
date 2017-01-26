@@ -1,6 +1,6 @@
 # Tweet Generator: Data Structures & Probability with Python
 
-## Working with this GitHub repository
+## Using with this GitHub repository
 
 This repository (located at `https://github.com/MakeSchool-18/Tweet-Generator`) is the course's _origin_ repository which will contain course materials including links, slides, and challenges.
 Note that you cannot commit or push to the origin repository.
