@@ -5,26 +5,18 @@ alg_word_set = []
 for line in alg_text:
     alg_word_set.extend(line.split())
 
-def give_default_value():
-    word_dict = {}
-    for key_word in alg_word_set:
-        word_dict[key_word] = 0
-    return word_dict
-
 def histogram():
-    new_word_dict = give_default_value()
+    new_word_dict = {}
     for key_word in alg_word_set:
-        new_word_dict[key_word] += 1
+        if key_word in new_word_dict:
+            new_word_dict[key_word] += 1
+        else:
+            new_word_dict[key_word] = 1
     return new_word_dict
 
 def unique_words(histogram_input):
     unique_total_count = 0
-    for key,value in histogram_input.items():
-        # print("Key : {0}, Value : {1}".format(key, value))
-        if value == 1:
-            # print("HOORAYYYYYYY")
-            unique_total_count += 1
-    return unique_total_count
+    return len(histogram_input.keys())
 
 
 if __name__ == '__main__':
