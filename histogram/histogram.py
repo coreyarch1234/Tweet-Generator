@@ -19,6 +19,8 @@ def specific_word_count(word, histogram_input):
     else:
         raise ValueError, "Word not found"
 
+#Average of the histogram
+
 if __name__ == '__main__':
     # Reading text and making the word set
     alg = open('words_alg.txt', 'r')
@@ -42,3 +44,6 @@ if __name__ == '__main__':
         if histogram()[most] == histogram()[sorted_set[-1]]:
             most_set.append(most)
     print("The most frequent words are " + str(most_set))
+
+    #Printing the number of different words
+    print("The number of distinct words are " + str(unique_words(histogram())))
