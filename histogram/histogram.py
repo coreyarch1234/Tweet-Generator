@@ -20,13 +20,25 @@ def specific_word_count(word, histogram_input):
         raise ValueError, "Word not found"
 
 if __name__ == '__main__':
-    # histogram()
-    # print(unique_words(histogram()))
+    # Reading text and making the word set
     alg = open('words_alg.txt', 'r')
     alg_text = alg.readlines()
-    word = str(raw_input())
+    # word = str(raw_input()) This is if you want to find the number of times a specific word appears
     alg_word_set = []
-    
     for line in alg_text:
         alg_word_set.extend(line.split())
-    print specific_word_count(word, histogram())
+
+    #Finding and printing the least frequent words
+    sorted_set = sorted(histogram(), key=histogram().__getitem__)
+    least_set = []
+    for least in sorted_set:
+        if histogram()[least] == histogram()[sorted_set[0]]:
+            least_set.append(least)
+    print("The least frequent words are " + str(least_set))
+
+    #Finding and printing the  most frequent words
+    most_set = []
+    for most in sorted_set:
+        if histogram()[most] == histogram()[sorted_set[-1]]:
+            most_set.append(most)
+    print("The most frequent words are " + str(most_set))
