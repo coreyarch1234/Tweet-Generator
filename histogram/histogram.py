@@ -28,7 +28,13 @@ def specific_word_count(word, histogram_input):
     else:
         raise 0
 
-#Average of the histogram
+#Average of the histogram. The mean is the sum of the number of all of the occurances divided by the number of unique words
+def mean(histogram_input):
+    sum = 0.0
+    unique_count = unique_words(histogram_input)
+    for key,value in histogram_input.iteritems():
+        sum += value
+    return (sum/unique_count)
 
 if __name__ == '__main__':
     histogram = histogram(read_in("words_alg.txt"))
@@ -49,3 +55,5 @@ if __name__ == '__main__':
 
     #Printing the number of different words
     print("The number of distinct words are " + str(unique_words(histogram)))
+
+    print("The mean of all of the words is " + str(mean(histogram)))
