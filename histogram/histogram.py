@@ -45,20 +45,11 @@ def median(histogram_input):
     median_array = []
     for key,value in histogram_input.iteritems():
         count += value
-        if count <= (median_value + 3) and count >= (median_value - 3) :
+        if count == value :
             # print(count)
             median_array.append(key)
     return(median_array)
 
-#Find the median. First, sum all of the occurances, and then divide by 2, and then find the words that correspond with that frequency
-def mode(histogram_input):
-
-    for key,value in histogram_input.iteritems():
-        count += value
-        if count <= (median_value + 3) and count >= (median_value - 3) :
-            # print(count)
-            median_array.append(key)
-    return(median_array)
 
 if __name__ == '__main__':
     histogram = histogram(read_in("words_alg.txt"))
