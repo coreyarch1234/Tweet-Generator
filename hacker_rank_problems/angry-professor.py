@@ -2,7 +2,7 @@ import sys
 
 
 t = int(raw_input().strip())
-for a1 in xrange(t):
+for a0 in xrange(t):
     n,k = raw_input().strip().split(' ')
     n,k = [int(n),int(k)]
     a = map(int,raw_input().strip().split(' '))
