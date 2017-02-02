@@ -24,10 +24,14 @@ def make_list(word_list):
 
 def random_list(a):
     b = []
+    temp_word = ""
+    length = len(a)
     for i in range(len(a)):
-        rand_word = random.choice(a)
-        a.remove(rand_word)
-        b.append(rand_word)
+            rand_num = random.randint(0, length - 1)
+            random_word = a[rand_num]
+            a.remove(random_word)
+            b.append(random_word)
+            length -= 1
     return b
 
 
