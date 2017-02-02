@@ -3,6 +3,7 @@ import random
 import sys
 import histogram
 
+filename = raw_input("Enter name of file without the txt extension: ") + '.txt'
 
 #This method will take in a txt file and print out a random word.
 def random_word(words):
@@ -14,4 +15,4 @@ def random_word(words):
     # print(word_hist)
 
 if __name__ == '__main__':
-    print(random_word('stochastic_random.txt'))
+    print(random_word(filename))
