@@ -2,6 +2,11 @@ import random
 import sys
 import histogram
 
+#Takes in any text file and creates a histogram named word_hist.
+filename = raw_input("Enter name of file without the txt extension: ") + '.txt'
+text_list = histogram.read_in(filename)
+word_hist = histogram.histogram(text_list)
+
 #Prints out a random word from a histogram with no weights
 def random_word():
     random_num = random.randint(0, len(text_list) - 1)
@@ -27,10 +32,6 @@ def percent_error(test_word, run_count):
     print("My percent error after running " + str(run_count) + " times is " + str(100 * (count - ideal_num)/ideal_num) + "%")
 
 if __name__ == '__main__':
-    #Takes in any text file and creates a histogram named word_hist.
-    filename = raw_input("Enter name of file without the txt extension: ") + '.txt'
-    text_list = histogram.read_in(filename)
-    word_hist = histogram.histogram(text_list)
     #Prints out the random word using weighted probability
     print random_word_weighted()
     #Uses the printed word to calculate the percent error
