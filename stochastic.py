@@ -1,11 +1,7 @@
+
 import random
 import sys
 import histogram
-
-#Takes in any text file and creates a histogram named word_hist.
-filename = raw_input("Enter name of file without the txt extension: ") + '.txt'
-text_list = histogram.read_in(filename)
-word_hist = histogram.histogram(text_list)
 
 #Prints out a random word from a histogram with no weights
 def random_word():
@@ -14,11 +10,14 @@ def random_word():
 
 #Uses weighted probability to print out a random word
 def random_word_weighted():
-    ordered_hist = list(reversed(sorted(word_hist, key=word_hist.__getitem__)))#Ordered from greatest to least.
+    ordered_list = (sorted(word_hist, key=word_hist.__getitem__, reverse=True))#Ordered from greatest to least.
+
+    print(ordered_list)
     length = len(text_list) + 0.0
     random_num = random.random()
-    for weight_key in ordered_hist: #Runs for each word in the histogram and subtracts the fraction of each word from the random number
-        random_num -= (word_hist[weight_key])/length
+    print("The random number is " + str(random_num))
+    for weight_key in ordered_list: #Runs for each word in the histogram and subtracts the fraction of each word from the random number
+        random_num -= (word_hist[weight_key])/length# first word was fish, second word is one, third word is red
         if random_num < 0: #Once the random number is less than 0, return that word. This will happen more often for words with bigger weighted probabilities
             return weight_key
 
@@ -32,7 +31,11 @@ def percent_error(test_word, run_count):
     print("My percent error after running " + str(run_count) + " times is " + str(100 * (count - ideal_num)/ideal_num) + "%")
 
 if __name__ == '__main__':
+    #Takes in any text file and creaes a histogram named word_hist.
+    filename = raw_input("Enter name of file without the txt extension: ") + '.txt'
+    text_list = histogram.read_in(filename)
+    word_hist = histogram.histogram(text_list)
     #Prints out the random word using weighted probability
     print random_word_weighted()
     #Uses the printed word to calculate the percent error
-    percent_error("fish", 100000)
+    # percent_error("machine", 100000)
