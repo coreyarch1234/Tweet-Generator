@@ -15,7 +15,7 @@ def random_word_weighted():
     print(ordered_list)
     length = len(text_list) + 0.0
     random_num = random.random()
-    print("The random number is " + str(random_num))
+    # print("The random number is " + str(random_num))
     for weight_key in ordered_list: #Runs for each word in the histogram and subtracts the fraction of each word from the random number
         random_num -= (word_hist[weight_key])/length# first word was fish, second word is one, third word is red
         if random_num < 0: #Once the random number is less than 0, return that word. This will happen more often for words with bigger weighted probabilities
@@ -28,7 +28,7 @@ def percent_error(test_word, run_count):
     for num in range(1, run_count):
         if random_word_weighted() == test_word:
             count += 1
-    print("My percent error after running " + str(run_count) + " times is " + str(100 * (count - ideal_num)/ideal_num) + "%")
+    # print("My percent error after running " + str(run_count) + " times is " + str(100 * (count - ideal_num)/ideal_num) + "%")
 
 if __name__ == '__main__':
     #Takes in any text file and creaes a histogram named word_hist.
