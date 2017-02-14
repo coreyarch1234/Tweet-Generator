@@ -4,7 +4,7 @@ def read_in(text):
     # Reading text and making the word set
     alg = open(text, 'r')
     alg_text = alg.readlines()
-    # word = str(raw_input()) This is if you want to find the number of times a specific word appears
+    # word = okstr(raw_input()) This is if you want to find the number of times a specific word appears
     alg_word_list = []
     for line in alg_text:
         alg_word_list.extend(line.split())
