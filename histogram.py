@@ -37,12 +37,13 @@ class Dictogram(dict): #name of the class name dict
     #unique words.
 def create_histogram(file_name):
     text_list = tokenize.read_in(filename)
-    print('text list:', text_list)
+    # print('text list:', text_list)
     hist_dict = Dictogram(text_list)
     # equivalent to:
     # hist_dict = Dictogram()
     # hist_dict.update(text_list)
-    print('dictogram:', hist_dict)
+    # print('dictogram:', hist_dict)
+    return hist_dict
 
 def test_histogram(text_list):
     print('text list:', text_list)
