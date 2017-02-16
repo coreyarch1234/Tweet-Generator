@@ -8,19 +8,25 @@ import tokenize #To create lists from text files
 
 # arguments = sys.argv[1:]  # exclude script name in first argument
 # filename = arguments[0]
+def create_input_list(filename):
+    text_list = tokenize.read_in(filename)
+    return text_list
+
+def create_input_dict(text_list):
+    corpus_dict = Dictogram(text_list)
+    return corpus_dict
+
 
 #Uses weighted probability to print out a random word
-def random_word_weighted(filename):
-    text_list = tokenize.read_in(filename)
-    corpus_dict = Dictogram(text_list)
-    ordered_list = (sorted(corpus_dict, key=corpus_dict.__getitem__, reverse=True))#Ordered from greatest to least.
+def random_word_weighted(input_dict):
+    ordered_list = (sorted(input_dict, key=input_dict.__getitem__, reverse=True))#Ordered from greatest to least.
 
     # print(ordered_list)
-    length = corpus_dict.tokens
+    length = input_dict.tokens
     random_num = random.random()
     # print("The random number is " + str(random_num))
     for weight_key in ordered_list: #Runs for each word in the histogram and subtracts the fraction of each word from the random number
-        random_num -= (corpus_dict[weight_key])/length# first word was fish, second word is one, third word is red
+        random_num -= (input_dict[weight_key])/length# first word was fish, second word is one, third word is red
         if random_num < 0: #Once the random number is less than 0, return that word. This will happen more often for words with bigger weighted probabilities
             return weight_key
 
@@ -42,7 +48,9 @@ if __name__ == '__main__':
         # text_list = read_from_file(filename)
         # text_list = tokenize.read_in(filename)
         # create_histogram(filename)
-        print(random_word_weighted(filename))
+        input_list = create_input_list(filename)
+        input_dict = create_input_dict(input_list)
+        print(random_word_weighted(input_dict))
     else:
         # test hisogram on given arguments
         test_histogram(arguments)
