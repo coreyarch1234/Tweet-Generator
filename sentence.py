@@ -64,9 +64,9 @@ if __name__ == '__main__':
         # text_list = read_from_file(filename)
         # text_list = tokenize.read_in(filename)
         # create_histogram(filename)
-        # print(generate_chain_list("fish", filename))
-        # print(markov_model(filename))
-        print(generate_sentence(filename, 10))
+        # print(generate_chain_list("pagoda!", filename))
+        print(markov_model(filename))
+        # print(generate_sentence(filename, 10))
 
     else:
         print("hello world")
