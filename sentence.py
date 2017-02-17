@@ -21,13 +21,10 @@ def generate_chain_list(key_word, filename):
     general_list = sample.create_input_list(filename)
     length_general = len(general_list)
     chain_list = []
-    count = 1
-    for index in range(length_general):
-        if general_list[index] == key_word and count != length_general:
+    for index in range(length_general - 1):
+        if general_list[index] == key_word: #better would be if you add start constant
             chain_list.append(general_list[index + 1])
-            count += 1
-        else:
-            count += 1
+    # print(chain_list)
     return chain_list #List of words that come after key word
 
 
@@ -45,11 +42,22 @@ def markov_model(filename):
 def generate_sentence(filename, sentence_length):
     general_list = sample.create_input_list(filename)
     general_dict = sample.create_input_dict(general_list)
-    sentence = ""
+    sentence_words = []
     markov_model_hash = markov_model(filename)
-    for count in range(sentence_length):
-        key_word_for_sentence = str(sample.random_word_weighted(general_dict))
-        sentence += key_word_for_sentence + " " + " " + str(sample.random_word_weighted(markov_model_hash[key_word_for_sentence])) + " "
+    key_word_for_sentence = sample.random_word_weighted(general_dict)
+    sentence_words.append(key_word_for_sentence)
+    # print(sentence_length)
+    for count in range(sentence_length - 1):
+        # print(sentence_words[-1])
+        markov_dict = markov_model_hash[sentence_words[-1]]
+        print(markov_dict)
+        if markov_dict == {}:
+            return (" ".join(sentence_words) + " END")
+        random_word = sample.random_word_weighted(markov_dict)
+        print(random_word)
+        if random_word is not None:
+            sentence_words.append(random_word)
+    sentence = " ".join(sentence_words)
     return sentence
 
 
@@ -65,8 +73,8 @@ if __name__ == '__main__':
         # text_list = tokenize.read_in(filename)
         # create_histogram(filename)
         # print(generate_chain_list("pagoda!", filename))
-        print(markov_model(filename))
-        # print(generate_sentence(filename, 10))
+        # print(markov_model(filename))
+        print(generate_sentence(filename, 120))
 
     else:
         print("hello world")
