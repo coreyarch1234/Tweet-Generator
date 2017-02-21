@@ -68,16 +68,28 @@ class LinkedList(object):
         """Insert the given item at the tail of this linked list"""
         # # TODO: append given item
         # pass
+        # if self.is_empty:
+        #     self.prepend(item)
+        #
+        # current = self.head
+        # new = Node(item)
+        # previous = None
+        # while current != None:
+        #     previous = current
+        #     current = current.getNext()
+        # previous.setNext(new)
         current = self.head
         new = Node(item)
-        previous = None
-        while current != None:
-            previous = current
-            current = current.getNext()
-        if previous == None: #Will occur when the linkedlist is empty
-            self.prepend(item)
+        if current:
+            while current.getNext() != None:
+                current = current.getNext()
+            current.setNext(new)
         else:
-            previous.setNext(new)
+            self.head = new
+
+        if new.getNext() == None:
+            self.tail = new
+
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list"""
@@ -86,6 +98,9 @@ class LinkedList(object):
         new = Node(item)
         new.setNext(self.head)
         self.head = new
+        if new.getNext() == None:
+            self.tail = new
+
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError"""
@@ -94,16 +109,23 @@ class LinkedList(object):
         current = self.head
         previous = None
         goal = False
-        while not goal:
-            if current.getData() == item:
-                goal = True
+        if current:
+            while not goal:
+                if current.getData() == item:
+                    goal = True
+                else:
+                    previous = current
+                    current = current.getNext()
+            if previous == None:
+                self.head = current.getNext()
+                if current.getNext() == None:
+                    self.tail = current.getNext()
             else:
-                previous = current
-                current = current.getNext()
-        if previous == None:
-            self.head = current.getNext()
+                previous.setNext(current.getNext())
+                if previous.getNext() == None:
+                    self.tail = previous
         else:
-            previous.setNext(current.getNext())
+            raise ValueError("Could not find value to delete.")
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality"""
@@ -112,11 +134,15 @@ class LinkedList(object):
         current = self.head
         goal = False
         while current != None and not goal:
-            if current.getData == item:
+            if quality(current.getData()):
                 goal = True
             else:
                 current = current.getNext()
-        return goal
+        if goal:
+            return current.getData()
+        else:
+            return None
+        # return quality(self.head.getData())
 
 
 def test_linked_list():
@@ -131,6 +157,7 @@ def test_linked_list():
     print('head: ' + str(ll.head))
     print('tail: ' + str(ll.tail))
     print(ll.length())
+    print(ll.find(lambda item: item == 'B'))
 
     ll.delete('A')
     print(ll)
