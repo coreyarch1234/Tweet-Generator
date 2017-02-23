@@ -27,6 +27,7 @@ class Node(object):
         self.next = new_next
 
 class LinkedList(object):
+
     def __init__(self, iterable=None):
         """Initialize this linked list; append the given items, if any"""
         self.head = None
@@ -34,6 +35,11 @@ class LinkedList(object):
         if iterable:
             for item in iterable:
                 self.append(item)
+
+    def __str__(self):
+        """Return a formatted string representation of this linked list"""
+        items = ['({})'.format(repr(item)) for item in self.items()]
+        return '[{}]'.format(' -> '.join(items))
 
     def __repr__(self):
         """Return a string representation of this linked list"""
@@ -45,6 +51,7 @@ class LinkedList(object):
         current = self.head
         while current is not None:
             result.append(current.data)
+
             # result.append(current)
             current = current.getNext()
         return result
@@ -55,6 +62,7 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes"""
+
         # # TODO: count number of items
         # pass
         current = self.head
@@ -136,6 +144,7 @@ class LinkedList(object):
 def test_linked_list():
     ll = LinkedList()
     print(ll)
+
     ll.append('A')
     print(ll)
     ll.append('B')
@@ -144,6 +153,7 @@ def test_linked_list():
     print(ll)
     print('head: ' + str(ll.head))
     print('tail: ' + str(ll.tail))
+
     print(ll.length())
     print(ll.find(lambda item: item == 'B'))
 
@@ -156,6 +166,7 @@ def test_linked_list():
     print('head: ' + str(ll.head))
     print('tail: ' + str(ll.tail))
     print(ll.length())
+
 
 
 if __name__ == '__main__':
