@@ -66,18 +66,6 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list"""
-        # # TODO: append given item
-        # pass
-        # if self.is_empty:
-        #     self.prepend(item)
-        #
-        # current = self.head
-        # new = Node(item)
-        # previous = None
-        # while current != None:
-        #     previous = current
-        #     current = current.getNext()
-        # previous.setNext(new)
         current = self.head
         new = Node(item)
         if current:
