@@ -33,8 +33,13 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table"""
-        # TODO: Collect all values in each of the buckets
-        pass
+        # # TODO: Collect all values in each of the buckets
+        # pass
+        all_values = []
+        for bucket in self.buckets:
+            for key, value in bucket.items():
+                all_values.append(value)
+        return all_values
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table"""
@@ -46,28 +51,50 @@ class HashTable(object):
 
     def length(self):
         """Return the length of this hash table by traversing its buckets"""
-        # TODO: Count number of key-value entries in each of the buckets
-        return 0
+        # # TODO: Count number of key-value entries in each of the buckets
+        # return 0
+        length = 0
+        for bucket in self.buckets:
+            for item in bucket.items():
+                if item is not None:
+                    length += 1
+        return length
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False"""
-        # TODO: Check if the given key exists in a bucket
-        pass
+        # # TODO: Check if the given key exists in a bucket
+        # pass
+        if key in keys(self): #keys(self) return a list of all keys
+            return True
+        return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError"""
-        # TODO: Check if the given key exists and return its associated value
-        pass
+        # # TODO: Check if the given key exists and return its associated value
+        # pass
+        for input_key, value in self.buckets[_bucket_index(key)].items():
+            if input_key == key:
+                return value
+        raise KeyError: "Key does not exist"
+
+
+
 
     def set(self, key, value):
         """Insert or update the given key with its associated value"""
-        # TODO: Insert or update the given key-value entry into a bucket
-        pass
+        # # TODO: Insert or update the given key-value entry into a bucket
+        # pass
+        self.buckets[_bucket_index(key)].append((key, value)) #appended key-value pair as node in linked list at that bucket
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError"""
-        # TODO: Find the given key and delete its entry if found
-        pass
+        # # TODO: Find the given key and delete its entry if found
+        # pass
+        if contains(key):
+            for input_key, value in self.buckets[_bucket_index(key)].items():
+                if input_key == key:
+                    self.buckets[_bucket_index(key)].delete((key, value))
+        raise KeyError: "Key does not exist"
 
 
 def test_hash_table():
