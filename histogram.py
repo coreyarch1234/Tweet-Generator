@@ -1,6 +1,14 @@
 from __future__ import division, print_function
 import sys
 import tokenize #To create lists from text files
+from hashtable import HashTable
+
+
+class Hashtogram(HashTable):
+
+    def __init__(self, iterable=None):
+        # TODO: fill in initializer
+        pass
 
 
 class Dictogram(dict): #name of the class name dict

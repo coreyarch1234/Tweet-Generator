@@ -25,11 +25,11 @@ class HashTable(object):
     def keys(self):
         """Return a list of all keys in this hash table"""
         # Collect all keys in each of the buckets
-        all_keys = []
-        for bucket in self.buckets:
-            for key, value in bucket.items():
-                all_keys.append(key)
-        return all_keys
+        all_keys = [] # O(1)
+        for bucket in self.buckets: #O(b) for b number of iterations
+            for key, value in bucket.items(): #O(l), l iterations == n/b
+                all_keys.append(key) #O(1)
+        return all_keys # n keys
 
     def values(self):
         """Return a list of all values in this hash table"""
@@ -67,10 +67,10 @@ class HashTable(object):
         # if key in self.keys(): #self.keys return a list of all keys
         #     return True
         # return False
-        index = self.bucket_index(key)
-        bucket = self.buckets[index]
-        found = bucket.find(lambda (k, v): k == key)
-        return found is not None
+        index = self.bucket_index(key) # constant
+        bucket = self.buckets[index] #constant
+        found = bucket.find(lambda (k, v): k == key) # average case O(L) - running time == n/b (average size of linked list)
+        return found is not None  #constant
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError"""
@@ -81,7 +81,7 @@ class HashTable(object):
         # for input_key, value in bucket.items():
         #     if input_key == key:
         #         return value
-        found = bucket.find(lambda (k, v): k == key) # average case - running time == n/b (average size of linked list)
+        found = bucket.find(lambda (k, v): k == key) # average case O(L) - running time == n/b (average size of linked list)
         if found is not None:
             _, value = found
             return value
