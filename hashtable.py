@@ -5,7 +5,7 @@ from linkedlist import LinkedList
 
 class HashTable(object):
 
-    def __init__(self, init_size=8):
+    def __init__(self, init_size=13):
         """Initialize this hash table with the given initial size"""
         self.buckets = [LinkedList() for i in range(init_size)]
 
@@ -109,6 +109,7 @@ class HashTable(object):
                     self.buckets[self.bucket_index(key)].delete((key, value))
         else:
             raise KeyError()
+
 
 
 def test_hash_table():

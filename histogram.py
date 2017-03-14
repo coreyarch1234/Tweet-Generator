@@ -1,14 +1,54 @@
+
+
 from __future__ import division, print_function
-import sys
-import tokenize #To create lists from text files
+
 from hashtable import HashTable
+import sys
+import tokenize
+import sample
 
 
 class Hashtogram(HashTable):
 
     def __init__(self, iterable=None):
-        # TODO: fill in initializer
-        pass
+        super(Hashtogram, self).__init__()
+        self.triple_list = []
+
+    #Create list of triple words from corpus
+    def generate_triple(self, filename):
+        complete_list = sample.create_input_list(filename)
+        for index in range(len(complete_list)-3):
+            self.triple_list.append((complete_list[index], complete_list[index + 1], complete_list[index + 2]))
+        return self.triple_list
+
+    def another_hashtogram(self):
+        return Hashtogram()
+
+    def create_markov_chain(self):
+        self.new_hashtogram = self.another_hashtogram()
+        for first_str, second_str, third_str in self.triple_list:
+            key = (first_str, second_str)
+            # print(key, third_str)
+            if self.contains(key):
+                self.hashtogram_for_key = self.get(key) #get the hashtogram corresponding to that key
+                if self.hashtogram_for_key.contains(third_str):
+                    current_key_value = self.hashtogram_for_key.get(third_str)
+                    self.hashtogram_for_key.set(third_str, current_key_value + 1.0) #update frequency
+                    print("Setting the third value to + 1")
+                    print(self.hashtogram_for_key)
+                    self.set(key, self.hashtogram_for_key) #update the overall hashtogram
+                else:
+                    self.hashtogram_for_key.set(third_str, 1.0) #set third_str key
+                    print("Setting the third value to 1")
+                    print(self.hashtogram_for_key)
+                    self.set(key, self.hashtogram_for_key)
+            else:
+                self.new_hashtogram = self.another_hashtogram()
+                self.new_hashtogram.set(third_str, 1.0)
+                print(self.new_hashtogram)
+                self.set(key, self.new_hashtogram) #If the key does not exist, create the key with a value of a hashtogram with a key of the third string and a value of it's frequency
+        return self
+
 
 
 class Dictogram(dict): #name of the class name dict
@@ -117,9 +157,13 @@ if __name__ == '__main__':
         # text_list = read_from_file(filename)
         # text_list = tokenize.read_in(filename)
         create_histogram(filename)
+        hash_t = Hashtogram()
+        hash_t.generate_triple(filename)
+        print(hash_t.create_markov_chain())
     else:
         # test hisogram on given arguments
         test_histogram(arguments)
+
 
 
 
