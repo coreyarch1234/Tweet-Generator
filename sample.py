@@ -1,6 +1,6 @@
 # module for generating a sample word from a histogram with weights
 from __future__ import division, print_function
-from histogram import Dictogram  # , Hashtogram
+from dictogram import Dictogram  # , Hashtogram
 import sys
 import random
 import tokenize #To create lists from text files
