@@ -1,7 +1,7 @@
 #!python
 
 from linkedlist import LinkedList
-
+import random
 
 class HashTable(object):
 
@@ -109,8 +109,9 @@ class HashTable(object):
                     self.buckets[self.bucket_index(key)].delete((key, value))
         else:
             raise KeyError()
-
-
+    def get_random_key(self):
+        random_num = random.randint(0, int(self.length() - 1))
+        return self.keys()[random_num]
 
 def test_hash_table():
     ht = HashTable()
@@ -129,6 +130,7 @@ def test_hash_table():
     print('get(V): ' + str(ht.get('V')))
     print('get(X): ' + str(ht.get('X')))
     print('length: ' + str(ht.length()))
+    print(ht.get_random_key())
 
     # Enable this after implementing delete:
     # print('Deleting entries:')

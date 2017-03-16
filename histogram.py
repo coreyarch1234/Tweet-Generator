@@ -17,7 +17,7 @@ class Hashtogram(HashTable):
     #Create list of triple words from corpus
     def generate_triple(self, filename):
         complete_list = sample.create_input_list(filename)
-        for index in range(len(complete_list)-3):
+        for index in range(len(complete_list)-2):
             self.triple_list.append((complete_list[index], complete_list[index + 1], complete_list[index + 2]))
         return self.triple_list
 
@@ -48,6 +48,20 @@ class Hashtogram(HashTable):
                 print(self.new_hashtogram)
                 self.set(key, self.new_hashtogram) #If the key does not exist, create the key with a value of a hashtogram with a key of the third string and a value of it's frequency
         return self
+
+#Uses weighted probability to return out a random word
+def random_word_weighted(input_dict):
+    # ordered_list = (sorted(input_dict, key=input_dict.__getitem__, reverse=True))#Ordered from greatest to least.
+
+    # print(ordered_list)
+    
+    length = input_dict.tokens
+    random_num = random.random()
+    # print("The random number is " + str(random_num))
+    for weight_key in ordered_list: #Runs for each word in the histogram and subtracts the fraction of each word from the random number
+        random_num -= (input_dict[weight_key])/length# first word was fish, second word is one, third word is red
+        if random_num < 0: #Once the random number is less than 0, return that word. This will happen more often for words with bigger weighted probabilities
+            return weight_key
 
 
 
