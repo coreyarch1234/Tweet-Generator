@@ -111,7 +111,7 @@ class HashTable(object):
             raise KeyError()
     def get_random_key(self):
         random_num = random.randint(0, int(self.length()))
-        return self.keys()[random_num]
+        return self.keys()[2]
 
 def test_hash_table():
     ht = HashTable()
