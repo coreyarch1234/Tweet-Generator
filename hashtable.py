@@ -5,7 +5,7 @@ import random
 
 class HashTable(object):
 
-    def __init__(self, init_size=200000):
+    def __init__(self, init_size=2000):
         """Initialize this hash table with the given initial size"""
         self.buckets = [LinkedList() for i in range(init_size)]
 
