@@ -3,9 +3,11 @@ from histogram import Hashtogram
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def generate_sentence():
     histogram = Hashtogram()
-    sentence = histogram.generate_random_sentence(5)
+    histogram.generate_triple()
+    histogram.create_markov_chain()
+    sentence = histogram.generate_random_sentence(2)
     return sentence
 
 if __name__ == '__main__':
