@@ -5,7 +5,8 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     histogram = Hashtogram()
-    print(histogram.generate_random_sentence(3))
+    sentence = histogram.generate_random_sentence(5)
+    return sentence
 
 if __name__ == '__main__':
     app.run()
