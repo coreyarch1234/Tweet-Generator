@@ -69,10 +69,6 @@ class Hashtogram(HashTable):
             first, second = second, self.random_word_weighted(first, second)
         return sentence +  " "
 
-
-
-
-
 class Dictogram(dict): #name of the class name dict
 
     def __init__(self, iterable=None):
