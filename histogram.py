@@ -19,8 +19,19 @@ class Hashtogram(HashTable):
     def test(self):
         return self.get_random_key()
 
+    def read_in(self, text):
+        text_file = open(text, 'r') #Read text file
+        word_list = [] #Create empty list to store words
+        for line in text_file.readlines(): #Loop through line of words
+            word_list.extend(line.split()) #Split words by white space and store as one huge list of individual words
+        return word_list
+
+    # def create_input_list(self, filename):
+    #     text_list = tokenize.read_in(filename)
+    #     return text_list
+
     def create_input_list(self, filename):
-        text_list = tokenize.read_in(filename)
+        text_list = self.read_in(filename)
         return text_list
 
     #Create list of triple words from corpus

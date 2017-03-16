@@ -1,4 +1,4 @@
-#!/Users/coreyharrilal/Desktop/ProductAcademy/Tweet-Generator/heroku/venv/bin/python
+#!/Users/coreyharrilal/Desktop/ProductAcademy/Tweet-Generator/heroku/venv/bin/python2.7
 
 # -*- coding: utf-8 -*-
 import re
