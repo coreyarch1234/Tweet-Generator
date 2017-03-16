@@ -6,6 +6,7 @@ from hashtable import HashTable
 import sys
 import tokenize
 import sample
+import random
 
 
 class Hashtogram(HashTable):
@@ -13,6 +14,9 @@ class Hashtogram(HashTable):
     def __init__(self, iterable=None):
         super(Hashtogram, self).__init__()
         self.triple_list = []
+
+    def test(self):
+        return self.get_random_key()
 
     #Create list of triple words from corpus
     def generate_triple(self, filename):
@@ -34,34 +38,38 @@ class Hashtogram(HashTable):
                 if self.hashtogram_for_key.contains(third_str):
                     current_key_value = self.hashtogram_for_key.get(third_str)
                     self.hashtogram_for_key.set(third_str, current_key_value + 1.0) #update frequency
-                    print("Setting the third value to + 1")
-                    print(self.hashtogram_for_key)
                     self.set(key, self.hashtogram_for_key) #update the overall hashtogram
                 else:
                     self.hashtogram_for_key.set(third_str, 1.0) #set third_str key
-                    print("Setting the third value to 1")
-                    print(self.hashtogram_for_key)
                     self.set(key, self.hashtogram_for_key)
             else:
                 self.new_hashtogram = self.another_hashtogram()
                 self.new_hashtogram.set(third_str, 1.0)
-                print(self.new_hashtogram)
                 self.set(key, self.new_hashtogram) #If the key does not exist, create the key with a value of a hashtogram with a key of the third string and a value of it's frequency
         return self
 
-#Uses weighted probability to return out a random word
-def random_word_weighted(input_dict):
-    # ordered_list = (sorted(input_dict, key=input_dict.__getitem__, reverse=True))#Ordered from greatest to least.
+    def random_word_weighted(self, first, second):
+        initial_key = first, second
+        tuple_list = self.get(initial_key).items() # Get the list of tuples that is the value of the 2 word tuple key
+        length = self.get(initial_key).length()
+        random_num = random.random()
+        for string_key, frequency in tuple_list:
+            random_num -= frequency/length
+            if random_num < 0: #Once the random number is less than 0, return that string. This will happen more often for words with bigger weighted probabilities
+                return string_key #Return first element in random 2 word tuple
+        return 0
 
-    # print(ordered_list)
-    
-    length = input_dict.tokens
-    random_num = random.random()
-    # print("The random number is " + str(random_num))
-    for weight_key in ordered_list: #Runs for each word in the histogram and subtracts the fraction of each word from the random number
-        random_num -= (input_dict[weight_key])/length# first word was fish, second word is one, third word is red
-        if random_num < 0: #Once the random number is less than 0, return that word. This will happen more often for words with bigger weighted probabilities
-            return weight_key
+    #create random sentence
+    def generate_random_sentence(self, sentence_length):
+        initial_key = self.get_random_key() #Get the initial random 2 word tuple
+        sentence = ""
+        first, second = initial_key[0], initial_key[1]
+        for count in range(sentence_length):
+            sentence += " " + first
+            first, second = second, self.random_word_weighted(first, second)
+        return sentence +  " "
+
+
 
 
 
@@ -173,7 +181,8 @@ if __name__ == '__main__':
         create_histogram(filename)
         hash_t = Hashtogram()
         hash_t.generate_triple(filename)
-        print(hash_t.create_markov_chain())
+        hash_t.create_markov_chain()
+        print(hash_t.generate_random_sentence(2))
     else:
         # test hisogram on given arguments
         test_histogram(arguments)
