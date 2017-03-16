@@ -1,9 +1,10 @@
 from flask import Flask
-from histogram import Hashtogram
+# from histogram import Hashtogram
 app = Flask(__name__)
 
 @app.route('/')
 def generate_sentence():
+    from histogram import Hashtogram
     histogram = Hashtogram()
     histogram.generate_triple()
     histogram.create_markov_chain()
