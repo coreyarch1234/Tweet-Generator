@@ -47,7 +47,6 @@ if __name__ == '__main__':
         filename = arguments[0]
         # text_list = read_from_file(filename)
         # text_list = tokenize.read_in(filename)
-        # create_histogram(filename)
         input_list = create_input_list(filename)
         input_dict = create_input_dict(input_list)
         print(random_word_weighted(input_dict))

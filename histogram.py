@@ -15,12 +15,13 @@ class Hashtogram(HashTable):
         super(Hashtogram, self).__init__()
         self.triple_list = []
 
+
     def test(self):
         return self.get_random_key()
 
     #Create list of triple words from corpus
-    def generate_triple(self, filename):
-        complete_list = sample.create_input_list(filename)
+    def generate_triple(self):
+        complete_list = sample.create_input_list(random.txt)
         for index in range(len(complete_list)-2):
             self.triple_list.append((complete_list[index], complete_list[index + 1], complete_list[index + 2]))
         return self.triple_list
@@ -88,12 +89,12 @@ if __name__ == '__main__':
         test_histogram(word_list)
     elif len(arguments) == 1:
         # test hisogram on text from a file
-        filename = arguments[0]
-        # text_list = read_from_file(filename)
-        # text_list = tokenize.read_in(filename)
-        
+        random.txt = arguments[0]
+        # text_list = read_from_file(random.txt)
+        # text_list = tokenize.read_in(random.txt)
+
         hash_t = Hashtogram()
-        hash_t.generate_triple(filename)
+        hash_t.generate_triple()
         hash_t.create_markov_chain()
         print(hash_t.generate_random_sentence(2))
     else:
