@@ -8,7 +8,7 @@ def generate_sentence():
     histogram = Hashtogram()
     histogram.generate_triple()
     histogram.create_markov_chain()
-    sentence = histogram.generate_random_sentence(2)
+    sentence = histogram.generate_random_sentence(2000)
     return sentence
 
 if __name__ == '__main__':
