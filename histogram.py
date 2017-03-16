@@ -5,7 +5,7 @@ from __future__ import division, print_function
 from hashtable import HashTable
 import sys
 import tokenize
-import sample
+# import sample
 import random
 
 
@@ -19,9 +19,13 @@ class Hashtogram(HashTable):
     def test(self):
         return self.get_random_key()
 
+    def create_input_list(self, filename):
+        text_list = tokenize.read_in(filename)
+        return text_list
+
     #Create list of triple words from corpus
     def generate_triple(self):
-        complete_list = sample.create_input_list(random.txt)
+        complete_list = self.create_input_list(random.txt)
         for index in range(len(complete_list)-2):
             self.triple_list.append((complete_list[index], complete_list[index + 1], complete_list[index + 2]))
         return self.triple_list
