@@ -7,7 +7,7 @@ def generate_sentence():
     histogram = Hashtogram()
     histogram.generate_triple()
     histogram.create_markov_chain()
-    sentence = histogram.generate_random_sentence(500)
+    sentence = histogram.generate_random_sentence(50)
     return sentence
 
 def shutdown_server():
