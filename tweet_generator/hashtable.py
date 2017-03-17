@@ -110,8 +110,12 @@ class HashTable(object):
         else:
             raise KeyError()
     def get_random_key(self):
-        random_num = random.randint(0, int(self.length() - 1))
+        key_length = len(self.keys())
+        random_num = random.randint(0, int(key_length - 1))
         return self.keys()[random_num]
+
+
+
 
 def test_hash_table():
     ht = HashTable()
