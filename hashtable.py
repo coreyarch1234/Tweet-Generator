@@ -5,7 +5,7 @@ import random
 
 class HashTable(object):
 
-    def __init__(self, init_size=900):
+    def __init__(self, init_size=150):
         """Initialize this hash table with the given initial size"""
         self.buckets = [LinkedList() for i in range(init_size)]
 
@@ -86,6 +86,7 @@ class HashTable(object):
             _, value = found
             return value
         raise KeyError("Key does not exist")
+        
 
     def set(self, key, value):
         """Insert or update the given key with its associated value"""

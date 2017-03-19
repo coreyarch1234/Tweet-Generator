@@ -65,15 +65,18 @@ class Hashtogram(HashTable):
         return self
 
     def random_word_weighted(self, first, second):
-        initial_key = first, second
-        tuple_list = self.get(initial_key).items() # Get the list of tuples that is the value of the 2 word tuple key
-        length = self.get(initial_key).length()
-        random_num = random.random()
-        for string_key, frequency in tuple_list:
-            random_num -= frequency/length
-            if random_num < 0: #Once the random number is less than 0, return that string. This will happen more often for words with bigger weighted probabilities
-                return string_key #Return first element in random 2 word tuple
-        return 0
+            initial_key = first, second
+            if self.contains(initial_key):
+                tuple_list = self.get(initial_key).items() # Get the list of tuples that is the value of the 2 word tuple key
+                length = self.get(initial_key).length()
+                random_num = random.random()
+                for string_key, frequency in tuple_list:
+                    random_num -= frequency/length
+                    if random_num < 0: #Once the random number is less than 0, return that string. This will happen more often for words with bigger weighted probabilities
+                        return string_key #Return first element in random 2 word tuple
+            else:
+                return "EXIT"
+
 
     #create random sentence
     def generate_random_sentence(self, sentence_length):
@@ -82,7 +85,12 @@ class Hashtogram(HashTable):
         first, second = initial_key[0], initial_key[1]
         for count in range(sentence_length):
             sentence += " " + first
-            first, second = second, self.random_word_weighted(first, second)
+            temp = self.random_word_weighted(first, second)
+            if temp == "EXIT":
+                return sentence +  " "
+            else:
+                first = second
+                second = temp
         return sentence +  " "
 
 
