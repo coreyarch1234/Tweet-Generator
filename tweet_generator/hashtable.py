@@ -5,7 +5,7 @@ import random
 
 class HashTable(object):
 
-    def __init__(self, init_size=12):
+    def __init__(self, init_size=600):
         """Initialize this hash table with the given initial size"""
         self.buckets = [LinkedList() for i in range(init_size)]
 
@@ -110,9 +110,10 @@ class HashTable(object):
         else:
             raise KeyError()
     def get_random_key(self):
-        key_length = len(self.keys())
-        random_num = random.randint(0, int(key_length - 1))
-        return self.keys()[random_num]
+        # key_length = len(self.keys())
+        # random_num = random.randint(0, int(key_length - 1))
+        # return self.keys()[random_num]
+        return random.choice(self.keys())
 
 
 
